@@ -1,60 +1,140 @@
 #include<stdio.h>
+
 #include<string.h>
+
 #include<stdlib.h>
+
 #include<time.h>
+
 #define MAX 4
 
 void gerar(int matriz[MAX][MAX])
-{
-    int i,j;
-    int v = 1;
-    for(i=0; i<MAX; i++) {
-        for(j=0; j<MAX; j++)
-        {
-            if(v==9)
-                v=1;
-            matriz[i][j]=v++;
-           }
-	}
-}    
-void embaralhar(int matriz[MAX][MAX])
-   {
-        int k;
-        int x1,y1,x2,y2;
-        srand(time(NULL));
-        for(k=0; k<100; k++)
-            {
-                x1=rand() % 4;
-                y1=rand() % 4;
-                x2=rand() % 4;
-                y2=rand() % 4;
 
-                int tmp = matriz[x1][y1];
-                matriz[x1][y1]=matriz[x2][y2];
-                matriz[x2][y2]=tmp;
-            }
+{
+
+    int i,j;
+
+    int v = 1;
+
+    for(i=0; i<MAX; i++) {
+
+        for(j=0; j<MAX; j++)
+
+        {
+
+            if(v==9)
+
+                v=1;
+
+            matriz[i][j]=v++;
+
+        }
+
+    }
+
+}
+
+void embaralhar(int matriz[MAX][MAX])
+
+{
+
+    int k;
+
+    int x1,y1,x2,y2;
+
+    srand(time(NULL));
+
+    for(k=0; k<100; k++)
+
+    {
+
+        x1=rand() % 4;
+
+        y1=rand() % 4;
+
+        x2=rand() % 4;
+
+        y2=rand() % 4;
+
+        int tmp = matriz[x1][y1];
+
+        matriz[x1][y1]=matriz[x2][y2];
+
+        matriz[x2][y2]=tmp;
+
+    }
+}
+void esconder(int matriz[MAX][MAX])
+{  
+
+    int i;
+
+    for ( i=0 ; i < MAX ; i++ ){
+
+      printf("-\n");
+  }
+}
+void esconderevela(int matriz[MAX][MAX],int *p,int *q,int *p2,int *q2)
+{     	
+     if(matriz[*p][*q] == matriz[*p2][*q2])
+	    matriz[MAX][MAX] = 0;
+	if(matriz[MAX][MAX] == 0)
+		printf("jogada já existente");  
 }
 void mostrar(int matriz[MAX][MAX])
+
 {
-	int i,j;
-            for(i=0; i<MAX; i++)
-            {
-                for(j=0; j<MAX; j++)
-                {
-                    printf(" %i",matriz[i][j]);
-                }
-                printf("\n");
-            }
-            printf("\n");
+
+    int i,j;
+
+    for(i=0; i<MAX; i++)
+
+    {
+
+        for(j=0; j<MAX; j++)
+
+        {
+
+            printf("%i",matriz[i][j]);
+
+        }
+
+        printf("\n");
+
+    }
+
+    printf("\n");
+
 }
+
 int main()
+
 {
-	    
-	    int matriz[MAX][MAX];
-	printf("escolha a  primeira posição");
-	            
-	gerar(matriz);
-            embaralhar(matriz);
-            mostrar(matriz);
-            return 0;  
+
+    int matriz[MAX][MAX];
+    int iv2,jv2,iv,jv,i;
+    gerar(matriz);
+    embaralhar(matriz);
+    esconder(matriz);
+    for(i=0; i <= MAX-1; i++) {
+	if(iv <= MAX-1 || jv <= MAX-1){
+             printf("escolha a linha 1\n");
+             scanf("%d", &iv);
+             printf("escolha a coluna 1\n");
+             scanf("%d", &jv);
+	     esconderrevela(matriz,&iv,&jv);
+
+	     printf("escolha a linha 2\n");
+             scanf("%d", &iv2);
+             printf("escolha a coluna 2\n");
+             scanf("%d", &jv2);
+	     esconderrevela(matriz,&iv2,&jv2);
+
+
+			}
+	else printf("erro  de jogada reenicie o jogo\n");		  
+		 }
+		   
+mostrar(matriz);
+return 0;
 }
