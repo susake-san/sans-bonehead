@@ -1,2 +1,0 @@
-# sans-bonehead
-trabalho final
